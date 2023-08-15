@@ -45,4 +45,6 @@
             </x-primary-button>
         </div>
     </form>
+
+    <div><a href="/login/Facebook" class="btn btn-primary">Login with Facebook</a></div>
 </x-guest-layout>
