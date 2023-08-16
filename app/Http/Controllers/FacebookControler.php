@@ -18,14 +18,16 @@ class FacebookControler extends Controller
     public function handleFacebookCallback()
     {
         $fbUser = Socialite::driver('facebook')->user();
+        dd($fbUser);
 
-        $user = User::updateOrCreate([
-            'facebook_id' => $fbUser->id,
-        ], [
-            'name' => $fbUser->name,
-            'email' => $fbUser->email,
-            'avatar' => $fbUser->avatar,
-        ]);
+        $user = User::updateOrCreate(
+            ['email' => $fbUser->getEmail()],
+            [
+                'name' => $fbUser->getName(),
+                'email' => $fbUser->getEmail(),
+                'avatar' => $fbUser->getAvatar(),
+            ]
+        );
 
         Auth::login($user);
 
