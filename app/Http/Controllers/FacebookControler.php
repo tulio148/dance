@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Laravel\Socialite\Facades\Socialite;
 
 class FacebookControler extends Controller
 {
@@ -28,6 +29,11 @@ class FacebookControler extends Controller
                 'avatar' => $fbUser->getAvatar(),
             ]
         );
+
+        $profilePictureUrl = $fbUser->avatar_original;
+        $imageContents = file_get_contents($profilePictureUrl);
+        $imageName = $user->id . '.jpg';
+        Storage::disk('public')->put($imageName, $imageContents);
 
         Auth::login($user);
 

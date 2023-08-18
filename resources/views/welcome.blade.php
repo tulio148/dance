@@ -9,4 +9,13 @@
         <li><a href="/login">login</a></li>
         <li><a href="/register">register</a></li>
     </ul>
+
+    @auth
+        <h1>{{ Auth::user()->name }}</h1>
+    @endauth
+    @guest
+
+        <h1>login</h1>
+    @endguest
+
 </x-guest-layout>
