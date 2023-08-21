@@ -30,7 +30,7 @@ class FacebookControler extends Controller
             ]
         );
 
-        $profilePictureUrl = $fbUser->avatar_original;
+        $profilePictureUrl = $fbUser->avatar;
         $imageContents = file_get_contents($profilePictureUrl);
         $imageName = $user->id . '.jpg';
         Storage::disk('public')->put($imageName, $imageContents);
