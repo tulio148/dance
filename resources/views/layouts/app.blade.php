@@ -14,15 +14,16 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
-        @include('layouts.navigation')
+    @include('layouts.navigation')
+    <div class="min-h-screen bg-gray-100 pt-16">
 
         <!-- Page Heading -->
         @if (isset($header))
-            <header class="bg-white shadow">
+            <header class="bg-white shadow ">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
@@ -34,6 +35,9 @@
             {{ $slot }}
         </main>
     </div>
+
+    @stack('styles')
+    @stack('scripts')
 </body>
 
 </html>
