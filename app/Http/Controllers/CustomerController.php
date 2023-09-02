@@ -13,10 +13,8 @@ class CustomerController extends Controller
 
     public function createcustomer()
     {
-        $client = new SquareClient([
-            'accessToken' => env('SQUARE_ACCESS_TOKEN'),
-            'environment' => env('SQUARE_ENVIRONMENT')
-        ]);
+        $client =  app(SquareClient::class);
+
         $body = new CreateCustomerRequest();
         $body->setIdempotencyKey(uniqid());
         $body->setGivenName(auth()->user()->name);
@@ -37,7 +35,8 @@ class CustomerController extends Controller
         } else {
             $errors = $api_response->getErrors();
         }
-        dd($result->getCustomer()->getId());
+        dd($result->getCustomer());
+        dd($customer);
 
 
 
