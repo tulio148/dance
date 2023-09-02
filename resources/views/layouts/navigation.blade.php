@@ -30,7 +30,7 @@
                     </x-nav-link>
                 </div>
                 <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('subscribe')" :active="request()->routeIs('subscribe')">
+                    <x-nav-link :href="route('welcome')" :active="request()->routeIs('subscribe')">
                         {{ __('Subscribe') }}
                     </x-nav-link>
                 </div>
@@ -92,7 +92,7 @@
             </x-responsive-nav-link>
         </div>
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('subscribe')" :active="request()->routeIs('subscribe')">
+            <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('subscribe')">
                 {{ __('Subscribe') }}
             </x-responsive-nav-link>
         </div>

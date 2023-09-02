@@ -27,9 +27,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/subscribe', [SubscriptionController::class, 'index'])->middleware(['auth', 'verified'])->name('subscribe');
-
-Route::post('/subscribe', [SubscriptionController::class, 'store'])->middleware(['auth', 'verified'])->name('subscribe.post');
 
 
 Route::middleware('auth')->group(function () {
