@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SubscriptionController;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,8 @@ Route::get('/test', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::post('/customer', [CustomerController::class, 'createcustomer'])->name('customer.create');
 
 
 
