@@ -47,4 +47,14 @@ class Customer extends Model
      *
      * @var array
      */
+
+    /**
+     * Define the inverse of the one-to-one relationship with the User model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
