@@ -13,34 +13,42 @@ class CustomerController extends Controller
 
     public function createcustomer()
     {
-        $client =  app(SquareClient::class);
+        $user = auth()->user();
+        $client = app(SquareClient::class);
 
-        $body = new CreateCustomerRequest();
-        $body->setIdempotencyKey(uniqid());
-        $body->setGivenName(auth()->user()->name);
-        $body->setEmailAddress(auth()->user()->email);
+        if (!$user->customer_id) {
 
-        $api_response = $client->getCustomersApi()->createCustomer($body);
+            $body = new CreateCustomerRequest();
+            $body->setIdempotencyKey(uniqid());
+            $body->setGivenName(auth()->user()->name);
+            $body->setEmailAddress(auth()->user()->email);
 
-        if ($api_response->isSuccess()) {
-            $result = $api_response->getResult();
-            $customer = Customer::updateOrCreate(
-                ["email" => $result->getCustomer()->getEmailAddress()],
-                [
-                    'id' => $result->getCustomer()->getId(),
-                    'name' => $result->getCustomer()->getGivenName(),
-                    'email' => $result->getCustomer()->getEmailAddress()
-                ]
-            );
+            $api_response = $client->getCustomersApi()->createCustomer($body);
+            if ($api_response->isSuccess()) {
+                $result = $api_response->getResult();
+                $customer = Customer::updateOrCreate(
+                    ["email" => $result->getCustomer()->getEmailAddress()],
+                    [
+                        'id' => $result->getCustomer()->getId(),
+                        'name' => $result->getCustomer()->getGivenName(),
+                        'email' => $result->getCustomer()->getEmailAddress()
+                    ]
+                );
+                $user->customer_id = $result->getCustomer()->getId();
+                $user->save();
+            } else {
+                $errors = $api_response->getErrors();
+            }
+            return redirect()->route('dashboard');
         } else {
-            $errors = $api_response->getErrors();
+            $api_response = $client->getCustomersApi()->retrieveCustomer($user->customer_id);
+
+            if ($api_response->isSuccess()) {
+                $result = $api_response->getResult();
+            } else {
+                $errors = $api_response->getErrors();
+            }
+            dd($result);
         }
-        dd($result->getCustomer());
-        dd($customer);
-
-
-
-
-        // dd($errors);
     }
 }
