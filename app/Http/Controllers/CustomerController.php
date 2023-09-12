@@ -2,57 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Services\CustomerService;
+use App\Http\Controllers\Controller;
 use Square\Models\Money;
 use Square\SquareClient;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Square\Models\CreatePaymentRequest;
 use Square\Models\CreateCustomerRequest;
 
 class CustomerController extends Controller
 {
+    protected $customerService;
+
+    public function __construct(CustomerService $customerService)
+    {
+        $this->customerService = $customerService;
+    }
 
     public function createcustomer()
     {
         $user = auth()->user();
         $client = app(SquareClient::class);
-        // dd($client);
-
+        
         if (!$user->customer_id) {
-
-            $body = new CreateCustomerRequest();
-            $body->setIdempotencyKey(uniqid());
-            $body->setGivenName(auth()->user()->name);
-            $body->setEmailAddress(auth()->user()->email);
-
-            $api_response = $client->getCustomersApi()->createCustomer($body);
-            if ($api_response->isSuccess()) {
-                $result = $api_response->getResult();
-                $customer = Customer::updateOrCreate(
-                    ["email" => $result->getCustomer()->getEmailAddress()],
-                    [
-                        'id' => $result->getCustomer()->getId(),
-                        'name' => $result->getCustomer()->getGivenName(),
-                        'email' => $result->getCustomer()->getEmailAddress()
-                    ]
-                );
-                $user->customer_id = $result->getCustomer()->getId();
-                
-               // @php intel-disable-next-line
-                $user->save();
-            } else {
-                $errors = $api_response->getErrors();
-            }
+            $customer = $this->customerService->createCustomer($user);
             return redirect()->route('dashboard');
-        } else {
-            $api_response = $client->getCustomersApi()->retrieveCustomer($user->customer_id);
 
-            if ($api_response->isSuccess()) {
-                $result = $api_response->getResult();
-            } else {
-                $errors = $api_response->getErrors();
-            }
+        } else {
+            $customer = $this->customerService->retrieveCustomer($user);
         }
     }
 
