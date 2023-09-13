@@ -12,9 +12,10 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <script type="text/javascript" src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/sq-card-pay.js', 'resources/js/sq-payment-flow.js'])
 </head>
 
 <body class="font-sans antialiased">
