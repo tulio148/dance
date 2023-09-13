@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\ProfileController;
-use App\Models\Customer;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +23,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/customer/index', [CustomerController::class, 'index'])->name('customer.index');
-Route::post('/customer/create', [CustomerController::class, 'store'])->name('customer.store');
+Route::get('/student/index', [StudentController::class, 'index'])->name('student.index');
+Route::post('/student/create', [StudentController::class, 'store'])->name('student.store');
 
 
 

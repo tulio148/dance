@@ -20,7 +20,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'avatar'
+        'avatar',
+        'student_id'
     ];
 
     /**
@@ -45,12 +46,12 @@ class User extends Authenticatable
 
 
     /**
-     * Define a one-to-one relationship with the Customer model.
+     * Define a one-to-one relationship with the Student model.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function customer()
+    public function student()
     {
-        return $this->hasOne(Customer::class);
+        return $this->hasOne(Student::class, 'student_id', 'id');
     }
 }

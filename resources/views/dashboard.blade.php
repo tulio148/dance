@@ -6,15 +6,15 @@
     </x-slot>
 
 
-    <form action="{{ route('customer.index') }}" method="GET">
+    <form action="{{ route('student.index') }}" method="GET">
         @csrf
-        <button type="submit">get customer</button>
+        <button type="submit">get student</button>
     </form>
 
 
-    <form action="{{ route('customer.store') }}" method="POST">
+    <form action="{{ route('student.store') }}" method="POST">
         @csrf
-        <button type="submit">create customer</button>
+        <button type="submit">create student</button>
     </form>
     {{-- 
     <form action="{{ route('customer.payment') }}" method="POST" id="payment-form">
