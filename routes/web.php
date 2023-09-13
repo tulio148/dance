@@ -19,16 +19,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
-Route::get('/test', function () {
-    return view('test');
-});
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::post('/customer', [CustomerController::class, 'createcustomer'])->name('customer.create');
+Route::get('/customer/index', [CustomerController::class, 'index'])->name('customer.index');
+Route::post('/customer/create', [CustomerController::class, 'store'])->name('customer.store');
 
 
 
