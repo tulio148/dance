@@ -9,10 +9,10 @@ use Square\Models\CreateCustomerRequest;
 class StudentService
 {
 
-    public function index($user)
+    public function index($student)
     {
         $client = app(SquareClient::class);
-        $api_response = $client->getCustomersApi()->retrieveCustomer($user->student_id);
+        $api_response = $client->getCustomersApi()->retrieveCustomer($student->id);
         if ($api_response->isSuccess()) {
             $result = $api_response->getResult();
             return $result;

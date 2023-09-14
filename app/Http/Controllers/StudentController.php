@@ -20,13 +20,14 @@ class StudentController extends Controller
 
     public function index()
     {
-        $user = auth()->user();
-
-        if ($user->student_id) {
-            $student = $this->studentService->index($user);
-            dd($student);
-            // return view('test', compact('student'));
+        $student = auth()->user()->student;
+        if ($student) {
+            $square_student = $this->studentService->index($student);
+            dd($square_student);
+        } else {
+            dd("no");
         }
+        //     return view('test', compact('student'));
     }
 
     public function store()

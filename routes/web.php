@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClassesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
@@ -26,6 +27,8 @@ Route::get('/dashboard', function () {
 Route::get('/student/index', [StudentController::class, 'index'])->name('student.index');
 Route::post('/student/create', [StudentController::class, 'store'])->name('student.store');
 
+Route::get('/classes', [ClassesController::class, 'index'])->name('classes');
+Route::post('/classes/store', [ClassesController::class, 'store'])->name('classes.store');
 
 
 Route::middleware('auth')->group(function () {
