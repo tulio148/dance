@@ -14,7 +14,7 @@ class AddStudentIdToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('student_id')->nullable();
+            $table->string('student_id')->nullable()->after('id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('set null');
         });
     }
