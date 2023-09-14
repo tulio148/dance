@@ -9,7 +9,12 @@ class Student extends Model
 {
     use HasFactory;
 
-
+ /**
+     * The data type of the ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
 
     /**
      * The attributes that are mass assignable.
