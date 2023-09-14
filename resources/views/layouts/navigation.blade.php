@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-gray-300 border-b border-gray-100 fixed w-full h-auto">
+<nav x-data="{ open: false }" class="bg-gray-300 border-b border-gray-100 fixed w-full h-16">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
@@ -30,8 +30,8 @@
                     </x-nav-link>
                 </div>
                 <div class="">
-                    <x-nav-link :href="route('welcome')" :active="request()->routeIs('subscribe')">
-                        {{ __('Subscribe') }}
+                    <x-nav-link :href="route('classes')" :active="request()->routeIs('classes')">
+                        {{ __('Classes') }}
                     </x-nav-link>
                 </div>
             </div>

@@ -21,8 +21,8 @@
 
 <body class="font-sans text-gray-900 antialiased">
     @include('layouts.navigation')
-    <main class="h-screen w-screen flex flex-col sm:justify-center items-center pt-16 bg-gray-100">
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+    <main class="flex flex-col sm:justify-center items-center pt-16 bg-gray-100">
+        <div class="w-full mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
             {{ $slot }}
         </div>
     </main>
