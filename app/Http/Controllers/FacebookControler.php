@@ -26,7 +26,6 @@ class FacebookControler extends Controller
             [
                 'name' => $fbUser->getName(),
                 'email' => $fbUser->getEmail(),
-                'avatar' => $fbUser->getAvatar(),
             ]
         );
 
