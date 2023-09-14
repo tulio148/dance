@@ -2,24 +2,29 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Student extends Model
 {
     use HasFactory;
 
- /**
-     * The data type of the ID.
+    /**
+     * Indicates if the model's ID is auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * The data type of ID.
      *
      * @var string
      */
     protected $keyType = 'string';
 
-     *
-     * @var bool
-     */
-    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -27,21 +32,26 @@ class Student extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'phone',
-        'id',
-        'user_id',
+        'user_id'
     ];
 
     /**
      * Define a belongs to relationship with the User model.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
 
-    public function user()
+    public function user(): HasOne
     {
-        return $this->belongsTo(User::class, 'student_id', 'id');
+        return $this->hasOne(User::class);
+    }
+
+    public function classes(): BelongsToMany
+    {
+        return $this->belongsToMany(Classes::class, 'class_student', 'student_id', 'class_id');
     }
 }
