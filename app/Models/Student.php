@@ -16,6 +16,11 @@ class Student extends Model
      */
     protected $keyType = 'string';
 
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
     /**
      * The attributes that are mass assignable.
      *
