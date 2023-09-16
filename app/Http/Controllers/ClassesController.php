@@ -2,20 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use Square\Models\Money;
-use Square\SquareClient;
+use RRule\RRule;
 use Illuminate\Http\Request;
+use App\Services\ClassesService;
 use App\Http\Controllers\Controller;
-use Square\Models\CatalogItemVariation;
 
 class ClassesController extends Controller
 {
+
+    protected $classesService;
+
+    public function __construct(ClassesService $classesService)
+    {
+        $this->classesService = $classesService;
+    }
+
     public function index()
     {
         return view('classes');
     }
 
-    public function store()
+
+    public function store(Request $request)
+    {
+        $this->classesService->store($request);
+        return redirect()->route('classes')->with('message', 'Class created successfully')->with('status', 200);
+    }
+
+    public function save()
     {
         $client = app(SquareClient::class);
         $idempotency_key = uniqid();
