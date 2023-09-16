@@ -11,10 +11,11 @@ class CreateClassesTable extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('name');
-            $table->string('category');
+            $table->string('description');
+            $table->string('style');
             $table->string('level');
             $table->string('instructor');
-            $table->string('option');
+            $table->string('enrollment_mode');
             $table->dateTime('datetime')->nullable();
             $table->string('location')->nullable();
             $table->decimal('price', 4, 2);

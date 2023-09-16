@@ -25,7 +25,7 @@ class Classes extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'id', 'name', "category", 'level', 'instructor', 'option', 'datetime', 'location', 'price'
+        'id', 'name', "description", "style", 'level', 'instructor', 'enrollment_mode', 'datetime', 'location', 'price'
     ];
 
     protected $casts = [
