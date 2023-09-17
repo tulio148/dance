@@ -171,6 +171,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\StudentServiceProvider::class,
         App\Providers\ClassesServiceProvider::class,
+        App\Providers\OrdersServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class
     ])->toArray(),
 
