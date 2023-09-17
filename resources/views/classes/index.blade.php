@@ -70,5 +70,18 @@
         </div>
     </form>
 
+    <form action="{{ route('classes.all') }}">
+        <button type="submit">get classess</button>
+    </form>
+
+
+    <h1>Classes by Name</h1>
+    <ul>
+        @foreach ($classes as $class)
+            <a href="{{ route('classes.show', ['class' => $class]) }}">{{ $class->name }}</a>
+        @endforeach
+    </ul>
+
     </div>
+
 </x-guest-layout>
