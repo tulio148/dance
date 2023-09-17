@@ -17,6 +17,7 @@ use Square\Models\UpsertCatalogObjectRequest;
 
 class ClassesService
 {
+
     public function store($request)
     {
         $name = $request->name;
@@ -27,8 +28,6 @@ class ClassesService
         $enrollment_mode = $request->enrollment_mode;
         $location = $request->location;
         $price = $request->price;
-        $image = $request->image;
-        $duration = $request->duration;
         $datetime = $request->datetime;
         $square_datetime = new RRule([
             'FREQ' => 'YEARLY',
@@ -36,8 +35,6 @@ class ClassesService
             'COUNT' => 1
         ]);
 
-        $capacity = $request->capacity;
-        $status = $request->status;
 
         if ($category == "samba") {
             $category_id = "OB5TM7ROA7PQNQFP5IK26QRJ";
@@ -87,11 +84,11 @@ class ClassesService
         $square_datetime_converted = new CatalogTimePeriod();
         $square_datetime_converted->setEvent($square_datetime->rfcString());
 
-        $new_class = new CatalogObject('ITEM_VARIATION', '#' . $name);
-        $new_class->setItemVariationData($class_specs);
-        $new_class->setTimePeriodData($square_datetime_converted);
+        $new_class_variation = new CatalogObject('ITEM_VARIATION', '#' . $name);
+        $new_class_variation->setItemVariationData($class_specs);
+        $new_class_variation->setTimePeriodData($square_datetime_converted);
 
-        $variations = [$new_class];
+        $variations = [$new_class_variation];
 
         $set_level = new CatalogItemOptionForItem();
         $set_level->setItemOptionId($level_id);
@@ -100,20 +97,21 @@ class ClassesService
         $set_enrollment_mode->setItemOptionId($enrollment_mode_id);
 
         $class_options = [$set_level, $set_enrollment_mode];
-        $item_data = new CatalogItem();
-        $item_data->setName($category . '_class');
-        $item_data->setCategoryId($category_id);
-        $item_data->setVariations($variations);
-        $item_data->setProductType('REGULAR');
-        $item_data->setItemOptions($class_options);
-        $item_data->setDescriptionHtml($description);
+
+        $new_class_data = new CatalogItem();
+        $new_class_data->setName($category . '_class');
+        $new_class_data->setCategoryId($category_id);
+        $new_class_data->setVariations($variations);
+        $new_class_data->setProductType('REGULAR');
+        $new_class_data->setItemOptions($class_options);
+        $new_class_data->setDescriptionHtml($description);
 
 
 
-        $object = new CatalogObject("ITEM", "#" . $category . '_class');
-        $object->setItemData($item_data);
+        $new_class = new CatalogObject("ITEM", "#" . $category . '_class');
+        $new_class->setItemData($new_class_data);
 
-        $body = new UpsertCatalogObjectRequest($idempotency_key, $object);
+        $body = new UpsertCatalogObjectRequest($idempotency_key, $new_class);
 
         $api_response = $client->getCatalogApi()->upsertCatalogObject($body);
 
