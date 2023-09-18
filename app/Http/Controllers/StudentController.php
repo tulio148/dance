@@ -11,34 +11,27 @@ use Square\Models\CreatePaymentRequest;
 
 class StudentController extends Controller
 {
-    protected $studentService;
-
-    public function __construct(StudentService $studentService)
-    {
-        $this->studentService = $studentService;
-    }
 
     public function index()
     {
         $student = auth()->user()->student;
         if ($student) {
-            $square_student = $this->studentService->index($student);
-            dd($square_student);
+            $square_student = app(StudentService::class);
+            dd($square_student->index($student));
         } else {
             dd("no");
         }
-        //     return view('test', compact('student'));
     }
 
     public function store()
     {
         $user = auth()->user();
-
-        if (!$user->student_id) {
-            $this->studentService->store($user);
+        if (!$user->student) {
+            app(StudentService::class)->store($user);
             return redirect()->route('dashboard');
         }
     }
+
 
 
     public function createpayment(Request $request)
