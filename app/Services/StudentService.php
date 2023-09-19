@@ -33,17 +33,16 @@ class StudentService
         $api_response = $client->getCustomersApi()->createCustomer($body);
 
         if ($api_response->isSuccess()) {
-            $result = $api_response->getResult();
+            $id = $api_response->getResult()->getCustomer()->getId();
             Student::create(
                 [
-                    'id' => $result->getCustomer()->getId(),
+                    'id' => $id,
                     'user_id' => $user->id,
-                    'name' => $result->getCustomer()->getGivenName(),
-                    'email' => $result->getCustomer()->getEmailAddress()
-
+                    'name' => $user->name,
+                    'email' => $user->email
                 ]
             );
-            $user->student_id = $result->getCustomer()->getId();
+            $user->student_id = $id;
             $user->save();
         } else {
             $errors = $api_response->getErrors();

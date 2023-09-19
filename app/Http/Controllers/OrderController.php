@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Square\Models\Order;
-use Square\SquareClient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Square\Models\CreateOrderRequest;
 use App\Models\Orders;
 use App\Services\OrdersService;
 

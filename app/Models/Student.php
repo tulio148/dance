@@ -60,4 +60,9 @@ class Student extends Model
     {
         return $this->hasMany(Orders::class);
     }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'student_id', 'id');
+    }
 }

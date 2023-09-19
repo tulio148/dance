@@ -20,9 +20,9 @@ class ClassesService
 
     public function store($request)
     {
-        $name = $request->name;
+        $name = $request->title;
         $description = $request->description;
-        $category = $request->category;
+        $category = $request->style;
         $level = $request->level;
         $instructor = $request->instructor;
         $enrollment_mode = $request->enrollment_mode;

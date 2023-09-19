@@ -11,18 +11,6 @@ use Square\Models\CreatePaymentRequest;
 
 class StudentController extends Controller
 {
-
-    public function index()
-    {
-        $student = auth()->user()->student;
-        if ($student) {
-            $square_student = app(StudentService::class);
-            dd($square_student->index($student));
-        } else {
-            dd("no");
-        }
-    }
-
     public function store()
     {
         $user = auth()->user();
@@ -36,10 +24,11 @@ class StudentController extends Controller
 
     public function createpayment(Request $request)
     {
+        dd($request->all());
+        $token = $request->input('token');
         $user = auth()->user();
         $client = app(SquareClient::class);
 
-        $token = $request->input('token');
         $amount_money = new Money();
         $amount_money->setAmount(100);
         $amount_money->setCurrency('AUD');
