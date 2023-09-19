@@ -24,11 +24,11 @@
                         </x-nav-link>
                     </div>
                 @endif
-                <div class="">
+                {{-- <div class="">
                     <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
                         {{ __('Home') }}
                     </x-nav-link>
-                </div>
+                </div> --}}
                 <div class="">
                     <x-nav-link :href="route('classes')" :active="request()->routeIs('classes')">
                         {{ __('Classes') }}
@@ -88,18 +88,18 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
+            {{-- <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
                 {{ __('Home') }}
-            </x-responsive-nav-link>
+            </x-responsive-nav-link> --}}
         </div>
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            {{-- <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+            </x-responsive-nav-link> --}}
         </div>
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('subscribe')">
+            {{-- <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('subscribe')">
                 {{ __('Subscribe') }}
-            </x-responsive-nav-link>
+            </x-responsive-nav-link> --}}
         </div>
 </nav>
