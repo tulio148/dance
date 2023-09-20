@@ -70,9 +70,6 @@
         </div>
     </form>
 
-    <form action="{{ route('classes.all') }}">
-        <button type="submit">get classess</button>
-    </form>
 
 
     <h1>Classes by Name</h1>

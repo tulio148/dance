@@ -39,6 +39,6 @@ class ClassesController extends Controller
     {
         $class = app(ClassesService::class);
         $class->store($request);
-        return redirect()->route('classes')->with('message', 'Class created successfully')->with('status', 200);
+        return redirect()->route('dashboard')->with('message', 'Class created successfully')->with('status', 200);
     }
 }

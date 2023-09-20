@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Orders;
 use Square\Models\Order;
 use Square\SquareClient;
+use App\Services\StudentService;
 use Square\Models\CreateOrderRequest;
 
 class OrdersService
@@ -13,17 +14,22 @@ class OrdersService
     {
         // $items = $request->items;
 
-        $items = ['4637TK7P6YRWC5364NAEUI4F'];
+        $items = ['2Z7NZ55KS2XTORG2SXHIRWW2'];
         $orderLineItems = [];
 
         foreach ($items as $item) {
-            $orderLineItem = new \Square\Models\OrderLineItem(2);
+            $orderLineItem = new \Square\Models\OrderLineItem(1);
             $orderLineItem->setCatalogObjectId($item);
             $orderLineItem->setItemType('ITEM');
             $orderLineItems[] = $orderLineItem;
         }
 
         $client = app(SquareClient::class);
+        $user = auth()->user();
+        if (!$user->student_id) {
+            $student = app(StudentService::class);
+            $student->store($user);
+        }
         $student_id = auth()->user()->student_id;
         $idempotency_key = uniqid();
         $source = new \Square\Models\OrderSource();
