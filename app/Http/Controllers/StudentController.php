@@ -24,20 +24,23 @@ class StudentController extends Controller
 
     public function createpayment(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
+
         $token = $request->input('token');
+        // dd($token);
         $user = auth()->user();
         $client = app(SquareClient::class);
 
         $amount_money = new Money();
-        $amount_money->setAmount(100);
+        $amount_money->setAmount(5000);
         $amount_money->setCurrency('AUD');
         $idempotency_key = uniqid();
 
         $body = new CreatePaymentRequest($token, $idempotency_key);
         $body->setAmountMoney($amount_money);
         $body->setAutocomplete(true);
-        $body->setCustomerId($user->customer_id);
+        $body->setCustomerId($user->student_id);
+        $body->setOrderId('oJTJnk5fDVG9e9icl7csjQkr8RJZY');
         $body->setLocationId('LQ8X13Y7ZQ55H');
         $body->setAcceptPartialAuthorization(false);
 

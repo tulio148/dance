@@ -15,7 +15,7 @@
     <!-- Scripts -->
     @routes
     @viteReactRefresh
-    @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx", 'resources/js/sq-card-pay.js', 'resources/js/sq-payment-flow.js'])
+    @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])
     <script type="text/javascript" src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
     @inertiaHead
 </head>

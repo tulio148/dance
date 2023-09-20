@@ -1,6 +1,7 @@
 <?php
 
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ClassesController;
@@ -25,6 +26,12 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/payment', function () {
+    return Inertia::render('Payment');
+});
+
+
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -33,6 +40,7 @@ Route::post('/payment', [StudentController::class, 'createpayment'])->name('paym
 
 Route::post('/class/store', [ClassesController::class, 'store'])->name('class.store');
 Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
+Route::post('/student/payment', [StudentController::class, 'createpayment'])->name('student.payment');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
